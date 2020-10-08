@@ -6,11 +6,10 @@ import 'package:flutter_login_getx_template/screens/authentication/AuthControlle
 import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:get/get.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp();
+  if (GetPlatform.isAndroid)
+    await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -35,8 +34,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Obx(() { return Get.find<AuthController>().user != null ? LandingPage() : Login(); }),
+      home: Obx(() {
+        return Get.find<AuthController>().user != null
+            ? LandingPage()
+            : Login();
+      }),
     );
   }
 }
-

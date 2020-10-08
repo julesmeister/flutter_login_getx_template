@@ -16,12 +16,12 @@ class Login extends GetWidget<AuthController> {
         fit: StackFit.expand,
         children: [
           Container(),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Center(
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8),

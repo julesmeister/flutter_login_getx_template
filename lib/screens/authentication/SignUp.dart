@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'AuthController.dart';
 
 class SignUp extends GetWidget<AuthController> {
+  final _nameController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmController = TextEditingController();
@@ -30,6 +31,22 @@ class SignUp extends GetWidget<AuthController> {
                           top: 28, left: 16, right: 16, bottom: 10),
                       child: Column(
                         children: [
+                          TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: _nameController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  hintText: "Enter name",
+                                  labelText: "Name",
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  border: OutlineInputBorder()),
+                              validator: (val) {
+                                if (val.isEmpty) return 'Empty';
+                                return null;
+                              }),
+                          addVerticalSpace(20),
                           TextFormField(
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -89,7 +106,7 @@ class SignUp extends GetWidget<AuthController> {
                               if (!_formKey.currentState.validate())
                                 return;
                               else
-                                controller.createUser(_usernameController.text,
+                                controller.createUser(_nameController.text, _usernameController.text,
                                     _passwordController.text);
                             },
                             child: Text('Sign Up'),

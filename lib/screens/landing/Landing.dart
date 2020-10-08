@@ -4,7 +4,6 @@ import 'package:flutter_login_getx_template/custom/OptionButton.dart';
 import 'package:flutter_login_getx_template/utils/constants.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 
-
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -40,9 +39,12 @@ class LandingPage extends StatelessWidget {
                         height: 50,
                         width: 50,
                         child: Icon(
-                          Icons.settings,
+                          Icons.logout,
                           color: COLOR_BLACK,
                         ),
+                        onTap: () {
+                          
+                        }
                       ),
                     ],
                   ),
@@ -74,8 +76,12 @@ class LandingPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   child: Row(
-                    children: ["<\$220,000","For Sale","3-4 Beds",">1000 sqft"]
-                        .map((filter) => ChoiceOption(text: filter)).toList(),
+                    children: [
+                      "<\$220,000",
+                      "For Sale",
+                      "3-4 Beds",
+                      ">1000 sqft"
+                    ].map((filter) => ChoiceOption(text: filter)).toList(),
                   ),
                 ),
                 addVerticalSpace(10),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_login_getx_template/screens/authentication/user.dart';
 import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
@@ -16,12 +17,17 @@ class AuthController extends GetxController {
     _firebaseUser.bindStream(_auth.authStateChanges());
   }
 
-  void createUser(String email, String password) async {
+  void createUser(String name, String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
-      snackBar("Success!", "Account created");
-      Get.offAll(LandingPage());
+      // create user in firestore
+      UserModel _user =
+          UserModel(id: _authResult.user.uid, name: name, email: email);
+      if (await UserController().createNewUser(_user)) {
+        Get.find<UserController>().user = _user;
+        snackBar("Success!", "Account created");
+      }
     } catch (e) {
       snackBar("Error creating account", e.message);
     }
@@ -29,9 +35,11 @@ class AuthController extends GetxController {
 
   void login(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      UserCredential _authResult = await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password);
-      Get.offAll(LandingPage());
+      Get.find<UserController>().user =
+          await UserController().getUser(_authResult.user.uid);
+      // No need to Get.back
     } catch (e) {
       print(e);
       snackBar("Error logging in", e.message);
@@ -41,6 +49,7 @@ class AuthController extends GetxController {
   void signOut() async {
     try {
       await _auth.signOut();
+      Get.find<UserController>().clear();
     } catch (e) {
       snackBar("Error signing out", e.message);
     }

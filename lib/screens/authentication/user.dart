@@ -6,7 +6,7 @@ class UserModel {
   String name;
   String email;
 
-  UserModel({id, name, email});
+  UserModel({this.id, this.name, this.email});
 
   UserModel.fromDocumentSnapshot(DocumentSnapshot doc) {
     this.id = doc.id;
@@ -33,6 +33,7 @@ class UserController extends GetxController {
       });
       return true;
     } catch (e) {
+      print(e.toString());
       return false;
     }
   }

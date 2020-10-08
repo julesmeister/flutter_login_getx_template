@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_getx_template/custom/BorderIcon.dart';
 import 'package:flutter_login_getx_template/custom/OptionButton.dart';
+import 'package:flutter_login_getx_template/screens/authentication/AuthController.dart';
 import 'package:flutter_login_getx_template/utils/constants.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
+import 'package:get/get.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -36,16 +38,15 @@ class LandingPage extends StatelessWidget {
                         ),
                       ),
                       BorderIcon(
-                        height: 50,
-                        width: 50,
-                        child: Icon(
-                          Icons.logout,
-                          color: COLOR_BLACK,
-                        ),
-                        onTap: () {
-                          
-                        }
-                      ),
+                          height: 50,
+                          width: 50,
+                          child: Icon(
+                            Icons.logout,
+                            color: COLOR_BLACK,
+                          ),
+                          onTap: () {
+                            Get.find<AuthController>().signOut();
+                          }),
                     ],
                   ),
                 ),

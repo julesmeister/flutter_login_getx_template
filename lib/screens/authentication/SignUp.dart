@@ -7,7 +7,7 @@ import 'AuthController.dart';
 
 class SignUp extends GetWidget<AuthController> {
   final _nameController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -50,7 +50,7 @@ class SignUp extends GetWidget<AuthController> {
                           TextFormField(
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              controller: _usernameController,
+                              controller: _emailController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                   hintText: "Enter email",
@@ -106,7 +106,7 @@ class SignUp extends GetWidget<AuthController> {
                               if (!_formKey.currentState.validate())
                                 return;
                               else
-                                controller.createUser(_nameController.text, _usernameController.text,
+                                controller.createUser(_nameController.text, _emailController.text,
                                     _passwordController.text);
                             },
                             child: Text('Sign Up'),

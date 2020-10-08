@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_getx_template/screens/authentication/SignUp.dart';
+import 'package:flutter_login_getx_template/screens/authentication/Login.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
 
 import 'AuthController.dart';
 
-class Login extends GetWidget<AuthController> {
+class SignUp extends GetWidget<AuthController> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -44,20 +44,29 @@ class Login extends GetWidget<AuthController> {
                                 labelText: "Password"),
                           ),
                           addVerticalSpace(20),
+                          TextFormField(
+                            controller: _passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                hintText: "Enter password",
+                                labelText: "Password"),
+                          ),
+                          addVerticalSpace(20),
                           RaisedButton(
                             onPressed: () {
-                              controller.login(_usernameController.text,
+                              controller.createUser(_usernameController.text,
                                   _passwordController.text);
                             },
-                            child: Text('Sign In'),
+                            child: Text('Sign Up'),
                             color: Colors.blue,
                             textColor: Colors.white,
                           ),
                           FlatButton(
                             onPressed: () {
-                              Get.offAll(SignUp());
+                              Get.offAll(Login());
                             },
-                            child: Text("Sign Up"),
+                            child: Text("Log In"),
                           ),
                         ],
                       ),

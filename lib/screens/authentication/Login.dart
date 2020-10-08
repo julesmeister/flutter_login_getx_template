@@ -8,7 +8,7 @@ import 'AuthController.dart';
 class Login extends GetWidget<AuthController> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,31 +22,48 @@ class Login extends GetWidget<AuthController> {
               padding: const EdgeInsets.all(8),
               child: SingleChildScrollView(
                 child: Form(
-                  key: formKey,
+                  key: _formKey,
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.only(
+                          top: 28, left: 16, right: 16, bottom: 10),
                       child: Column(
                         children: [
                           TextFormField(
-                            controller: _usernameController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                                hintText: "Enter email", labelText: "Email"),
-                          ),
+                              controller: _usernameController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                  hintText: "Enter email",
+                                  labelText: "Email",
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  border: OutlineInputBorder()),
+                              validator: (val) {
+                                if (val.isEmpty) return 'Empty';
+                                if (!val.isEmail) return 'Enter a valid email';
+                                return null;
+                              }),
                           addVerticalSpace(20),
                           TextFormField(
-                            controller: _passwordController,
-                            keyboardType: TextInputType.text,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                hintText: "Enter password",
-                                labelText: "Password"),
-                          ),
+                              controller: _passwordController,
+                              keyboardType: TextInputType.text,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                  hintText: "Enter password",
+                                  labelText: "Password",
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  border: OutlineInputBorder()),
+                              validator: (val) {
+                                if (val.isEmpty) return 'Empty';
+                                return null;
+                              }),
                           addVerticalSpace(20),
                           RaisedButton(
                             onPressed: () {
-                              controller.login(_usernameController.text,
+                              if (!_formKey.currentState.validate())
+                                return;
+                              else controller.login(_usernameController.text,
                                   _passwordController.text);
                             },
                             child: Text('Sign In'),

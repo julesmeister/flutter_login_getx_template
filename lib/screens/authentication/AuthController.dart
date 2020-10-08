@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -14,21 +15,21 @@ class AuthController extends GetxController {
     _firebaseUser.bindStream(_auth.authStateChanges());
   }
 
-  void createUser(String email, String password) {
+  void createUser(String email, String password) async {
     try {
-      _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email.trim(), password: password);
     } catch (e) {
-      Get.snackbar("Error creating account", e.message,
-          snackPosition: SnackPosition.BOTTOM);
+      snackBar("Error creating account", e.message);
     }
   }
 
-  void login(String email, String password) {
+  void login(String email, String password) async {
     try {
-      _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email.trim(), password: password);
     } catch (e) {
-      Get.snackbar("Error logging in", e.message,
-          snackPosition: SnackPosition.BOTTOM);
+      print(e);
+      snackBar("Error logging in", e.message);
     }
   }
 
@@ -36,8 +37,7 @@ class AuthController extends GetxController {
     try {
       await _auth.signOut();
     } catch (e) {
-      Get.snackbar("Error signing out", e.message,
-          snackPosition: SnackPosition.BOTTOM);
+      snackBar("Error signing out", e.message);
     }
   }
 }

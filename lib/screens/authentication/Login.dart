@@ -30,6 +30,8 @@ class Login extends GetWidget<AuthController> {
                       child: Column(
                         children: [
                           TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _usernameController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
@@ -45,6 +47,8 @@ class Login extends GetWidget<AuthController> {
                               }),
                           addVerticalSpace(20),
                           TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _passwordController,
                               keyboardType: TextInputType.text,
                               obscureText: true,
@@ -63,8 +67,9 @@ class Login extends GetWidget<AuthController> {
                             onPressed: () {
                               if (!_formKey.currentState.validate())
                                 return;
-                              else controller.login(_usernameController.text,
-                                  _passwordController.text);
+                              else
+                                controller.login(_usernameController.text,
+                                    _passwordController.text);
                             },
                             child: Text('Sign In'),
                             color: Colors.blue,

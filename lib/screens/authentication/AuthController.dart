@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,8 @@ class AuthController extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
+      snackBar("Success!", "Account created");
+      Get.offAll(LandingPage());
     } catch (e) {
       snackBar("Error creating account", e.message);
     }
@@ -26,7 +29,9 @@ class AuthController extends GetxController {
 
   void login(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email.trim(), password: password);
+      await _auth.signInWithEmailAndPassword(
+          email: email.trim(), password: password);
+      Get.offAll(LandingPage());
     } catch (e) {
       print(e);
       snackBar("Error logging in", e.message);

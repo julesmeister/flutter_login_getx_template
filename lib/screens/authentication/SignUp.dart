@@ -31,6 +31,8 @@ class SignUp extends GetWidget<AuthController> {
                       child: Column(
                         children: [
                           TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _usernameController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
@@ -46,6 +48,8 @@ class SignUp extends GetWidget<AuthController> {
                               }),
                           addVerticalSpace(20),
                           TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _passwordController,
                               keyboardType: TextInputType.text,
                               obscureText: true,
@@ -61,6 +65,8 @@ class SignUp extends GetWidget<AuthController> {
                               }),
                           addVerticalSpace(20),
                           TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _confirmController,
                               keyboardType: TextInputType.text,
                               obscureText: true,

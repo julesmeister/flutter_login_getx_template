@@ -21,5 +21,8 @@ Web
  - Need to add Firebase SDK Snippet to index.html which initializes Firebase instead of doing it inside main()
 
 Android
+- Copy google-services to /android/app folder
 - Need to add <code> await Firebase.initializeApp();</code> in main() if platform is Android
-- Firebase plugins will be added in pubspec.yaml
+- Firebase plugins should be added in pubspec.yaml
+- Move google-services.json to android/app/ folder
+- Do this <code>git rm --cached android/app/google-services.json</code> if you have pushed the google-services.json to Github. And don't forget to .gitignore it, <code>git rm --cached android/app/google-services.json</code>

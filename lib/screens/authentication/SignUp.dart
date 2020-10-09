@@ -118,7 +118,7 @@ class SignUp extends GetWidget<AuthController> {
                           ),
                           FlatButton(
                             onPressed: () {
-                              Get.offAll(Login());
+                              Get.offAllNamed("login");
                             },
                             child: Text("Log In"),
                           ),

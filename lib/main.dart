@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_getx_template/screens/authentication/AuthBinding.dart';
 import 'package:flutter_login_getx_template/screens/authentication/Login.dart';
 import 'package:flutter_login_getx_template/screens/authentication/AuthController.dart';
+import 'package:flutter_login_getx_template/screens/authentication/SignUp.dart';
 import 'package:flutter_login_getx_template/screens/authentication/user.dart';
 import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:get/get.dart';
@@ -38,20 +39,28 @@ class MyApp extends StatelessWidget {
       // is not restarted.
       primarySwatch: Colors.blue,
     ),
-    home: Root(),
+    home: Obx(() {
+      return Get.find<AuthController>().user != null ? LandingPage() : Login();
+    }),
+    getPages: [
+      GetPage(name: "login", page: () => Login(), binding: AuthBinding()),
+      GetPage(name: "signup", page: () => SignUp(), binding: AuthBinding()),
+      GetPage(
+          name: "landing", page: () => LandingPage(), binding: AuthBinding()),
+    ],
   );
 }
 
-class Root extends GetWidget<AuthController> {
-  @override
-  Widget build(BuildContext ctx) {
-    return GetX(
-      initState: (_) async {
-        Get.put(UserController());
-      },
-      builder: (_) {
-        return Get.find<AuthController>().user != null ? LandingPage() : Login();
-      },
-    );
-  }
-}
+// class Root extends GetWidget<AuthController> {
+//   @override
+//   Widget build(BuildContext ctx) {
+//     return GetX(
+//       initState: (_) async {
+//         Get.put(UserController());
+//       },
+//       builder: (_) {
+//         return Get.find<AuthController>().user != null ? LandingPage() : Login();
+//       },
+//     );
+//   }
+// }

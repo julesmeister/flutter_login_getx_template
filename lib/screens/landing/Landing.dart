@@ -14,6 +14,8 @@ class LandingPage extends GetWidget<AuthController> {
     double padding = 25;
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
     var scaffoldKey = GlobalKey<ScaffoldState>();
+    Get.put(UserController());
+
     return SafeArea(
       child: Scaffold(
           key: scaffoldKey,
@@ -21,14 +23,19 @@ class LandingPage extends GetWidget<AuthController> {
             child: new ListView(
               children: [
                 GetX<UserController>(
-                  initState: (_) async{
-                    Get.find<UserController>().user = await UserController().getUser(Get.find<AuthController>().uid.toString());
+                  init: UserController(),
+                  initState: (_) async {
+                    Get.find<UserController>().user = await UserController()
+                        .getUser(Get.find<AuthController>().uid.toString());
                   },
                   builder: (_) {
-                    return UserAccountsDrawerHeader(
-                        currentAccountPicture: Text(_.user.name[0]),
-                        accountName: Text(_.user.name ?? "Loading"),
-                        accountEmail: Text(_.user.email ?? "Loading"));
+                    return _.user.name != null
+                        ? UserAccountsDrawerHeader(
+                            currentAccountPicture:
+                                CircleAvatar(child: Text(_.user.name[0])),
+                            accountName: Text(_.user.name ?? "Loading"),
+                            accountEmail: Text(_.user.email ?? "Loading"))
+                        : Container();
                   },
                 )
               ],

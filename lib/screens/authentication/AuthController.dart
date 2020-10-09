@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_getx_template/screens/authentication/Login.dart';
 import 'package:flutter_login_getx_template/screens/authentication/user.dart';
-import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +13,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
+    Get.put(UserController());
     _firebaseUser.bindStream(_auth.authStateChanges());
   }
 
@@ -33,7 +31,7 @@ class AuthController extends GetxController {
         if (userCreated) {
           Get.find<UserController>().user = _user;
           snackBar("Success!", "Account created");
-          Get.offAll(LandingPage());
+          Get.offAllNamed("landing");
         }
       });
     } catch (e) {
@@ -48,6 +46,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
       Get.find<UserController>().user =
           await UserController().getUser(_authResult.user.uid);
+      Get.offAllNamed("landing");
       // No need to Get.back
     } catch (e) {
       print(e);
@@ -59,7 +58,7 @@ class AuthController extends GetxController {
     try {
       await _auth.signOut();
       Get.find<UserController>().clear();
-      Get.offAll(Login());
+      Get.offAllNamed("login");
     } catch (e) {
       snackBar("Error signing out", e.toString());
     }

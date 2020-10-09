@@ -43,6 +43,7 @@ class UserController extends GetxController {
       return UserModel.fromDocumentSnapshot(
           await _firestore.collection("users").doc(uid).get());
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

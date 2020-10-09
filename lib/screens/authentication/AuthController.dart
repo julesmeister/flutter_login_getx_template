@@ -9,6 +9,7 @@ class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
   Rx<User> _firebaseUser = Rx<User>();
 
+  String get uid => _firebaseUser.value?.uid;
   String get user => _firebaseUser.value?.email;
 
   @override
@@ -50,7 +51,7 @@ class AuthController extends GetxController {
       // No need to Get.back
     } catch (e) {
       print(e);
-      snackBar("Error logging in", e.message);
+      snackBar("Error logging in", e.toString());
     }
   }
 
@@ -60,7 +61,7 @@ class AuthController extends GetxController {
       Get.find<UserController>().clear();
       Get.offAll(Login());
     } catch (e) {
-      snackBar("Error signing out", e.message);
+      snackBar("Error signing out", e.toString());
     }
   }
 }

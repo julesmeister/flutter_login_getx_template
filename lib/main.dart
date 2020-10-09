@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_getx_template/screens/authentication/AuthBinding.dart';
 import 'package:flutter_login_getx_template/screens/authentication/Login.dart';
 import 'package:flutter_login_getx_template/screens/authentication/AuthController.dart';
+import 'package:flutter_login_getx_template/screens/authentication/user.dart';
 import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -37,8 +38,20 @@ class MyApp extends StatelessWidget {
       // is not restarted.
       primarySwatch: Colors.blue,
     ),
-    home: Obx(() {
-      return Get.find<AuthController>().user != null ? LandingPage() : Login();
-    }),
+    home: Root(),
   );
+}
+
+class Root extends GetWidget<AuthController> {
+  @override
+  Widget build(BuildContext ctx) {
+    return GetX(
+      initState: (_) async {
+        Get.put(UserController());
+      },
+      builder: (_) {
+        return Get.find<AuthController>().user != null ? LandingPage() : Login();
+      },
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_getx_template/custom/AuthLogo.dart';
 import 'package:flutter_login_getx_template/screens/authentication/SignUp.dart';
 import 'package:flutter_login_getx_template/utils/widget_functions.dart';
 import 'package:get/get.dart';
@@ -24,11 +25,13 @@ class Login extends GetWidget<AuthController> {
                 child: Form(
                   key: _formKey,
                   child: Card(
+                    elevation: 0,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 28, left: 16, right: 16, bottom: 10),
+                          top: 0, left: 16, right: 16, bottom: 10),
                       child: Column(
                         children: [
+                          AuthLogo(),
                           TextFormField(
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,

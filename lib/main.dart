@@ -4,7 +4,6 @@ import 'package:flutter_login_getx_template/screens/authentication/AuthBinding.d
 import 'package:flutter_login_getx_template/screens/authentication/Login.dart';
 import 'package:flutter_login_getx_template/screens/authentication/AuthController.dart';
 import 'package:flutter_login_getx_template/screens/authentication/SignUp.dart';
-import 'package:flutter_login_getx_template/screens/authentication/user.dart';
 import 'package:flutter_login_getx_template/screens/landing/Landing.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';

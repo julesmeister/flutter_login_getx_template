@@ -26,3 +26,19 @@ Android
 - Firebase plugins should be added in pubspec.yaml
 - Move google-services.json to android/app/ folder
 - Do this <code>git rm --cached android/app/google-services.json</code> if you have pushed the google-services.json to Github. And don't forget to .gitignore it, <code>git rm --cached android/app/google-services.json</code>
+
+## Unique Features
+- Opens a drawer without using an app bar.
+
+   <codeblock>
+   
+      var scaffoldKey = GlobalKey<ScaffoldState>();
+
+      Scaffold(
+      key: scaffoldKey
+
+
+      // Use this on your button
+
+      scaffoldKey.currentState.openDrawer();
+   </codeblock>
